@@ -1,0 +1,12 @@
+{
+ "geradoEm": null,
+ "marca": { "nome": "EKKLESIA", "frase": "Vista o que você crê.", "apresentacao": "", "site": "", "instagram": "", "whatsappLink": "", "logo": "img/logo.png" },
+ "loja": {
+  "pix": { "chave": "", "nome": "EKKLESIA", "cidade": "RONDONOPOLIS" },
+  "whatsapp": "", "entradaPct": 50, "freteGratisAcima": 299, "prazoProducao": "",
+  "hero": { "titulo": "Vista o que você crê", "destaque": "EKKLESIA", "versiculo": "\"Ide por todo o mundo e pregai o evangelho.\" — Mc 16:15", "texto": "Streetwear cristão premium. Cada peça é uma declaração de fé, feita para ser vestida com propósito.", "imagem": null },
+  "faixa": "MODA COM PROPÓSITO ✦ IDE POR TODO O MUNDO ✦ PRÉ-VENDA COM 50% DE ENTRADA NO PIX ✦ PRODUÇÃO SOB ENCOMENDA",
+  "manifesto": "EKKLESIA não é só uma loja. É um movimento. Cada peça que você veste é uma declaração: você não compra roupa, você veste um propósito."
+ },
+ "produtos": []
+}
