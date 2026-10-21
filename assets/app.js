@@ -409,6 +409,8 @@ document.addEventListener('click', (e) => {
 document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeDrawers(); });
 window.addEventListener('hashchange', route);
 
+if ('serviceWorker' in navigator) navigator.serviceWorker.register('sw.js').catch(() => {});
+
 (async () => {
   try {
     D = await (await fetch(`data/loja.json?v=${Date.now()}`, { cache: 'no-store' })).json();
