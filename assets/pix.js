@@ -23,9 +23,10 @@ export function normalizeKey(k) {
 }
 
 export function pixPayload({ chave, nome, cidade, valor, txid }) {
-  const merchant = field('00', 'br.gov.bcb.pix') + field('01', normalizeKey(chave));
+  const merchant = field('00', 'BR.GOV.BCB.PIX') + field('01', normalizeKey(chave));
   const id = (String(txid || '***').replace(/[^A-Za-z0-9]/g, '').slice(0, 25)) || '***';
-  const body = field('00', '01')
+  // 01=12: código para um pagamento só (como o gerado pelo banco)
+  const body = field('00', '01') + (valor ? field('01', '12') : '')
     + field('26', merchant)
     + field('52', '0000')
     + field('53', '986')

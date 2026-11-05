@@ -83,7 +83,7 @@ function priceHTML(p, big = false) {
   return `<div class="price ${big ? 'big' : ''}"><span class="now">${brl(p.preco)}</span></div>`;
 }
 function card(p) {
-  const tag = p.lancamento ? `<span class="tag gold">LANÇAMENTO -${p.lancamento.desconto}%</span>` : p.disponibilidade === 'pre-venda' ? '<span class="tag">PRÉ-VENDA</span>' : '';
+  const tag = p.lancamento ? `<span class="tag gold">PROMOÇÃO DE LANÇAMENTO</span>` : p.disponibilidade === 'pre-venda' ? '<span class="tag">PRÉ-VENDA</span>' : '';
   return `
     <a class="card" href="#/produto/${esc(p.slug)}">
       <div class="card-img">${p.imagens[0] ? `<img src="${esc(p.imagens[0])}" alt="${esc(p.nome)}" loading="lazy">` : ''}${tag}
@@ -119,8 +119,8 @@ function home() {
     ${marquee(L.faixa || `${D.marca.nome} ✦ MODA COM PROPÓSITO`)}
     ${launch.length ? `
     <section class="section">
-      <div class="sec-head"><span class="kicker">✦ PRÉ-LANÇAMENTO EXCLUSIVO</span><h2>LANÇAMENTO COM ${Math.max(...launch.map((p) => p.lancamento.desconto))}% OFF</h2>
-        <p>Desconto para as primeiras peças vendidas. Garanta a sua com ${L.entradaPct}% de entrada no Pix.</p></div>
+      <div class="sec-head"><span class="kicker">✦ PROMOÇÃO DE LANÇAMENTO</span><h2>AS ${Math.max(...launch.map((p) => p.lancamento.limite))} PRIMEIRAS PEÇAS A PARTIR DE ${brl(Math.min(...launch.map((p) => p.lancamento.precoLancamento)))}</h2>
+        <p>Preço especial só para as primeiras peças vendidas. Garanta a sua com ${L.entradaPct}% de entrada no Pix ou pague o valor total.</p></div>
       <div class="grid">${launch.map(card).join('')}</div>
     </section>` : ''}
     <section class="section">
@@ -178,7 +178,7 @@ function productPage(slug) {
         <h1>${esc(p.nome)}</h1>
         <span class="muted">${esc(p.genero)} · ${esc(p.categoria)}${p.sku ? ` · ${esc(p.sku)}` : ''}</span>
         ${priceHTML(p, true)}
-        ${p.lancamento ? `<div class="launch-box"><b>Lançamento: ${p.lancamento.desconto}% OFF</b><div class="left"><i style="width:${Math.max(4, 100 * p.lancamento.restam / p.lancamento.limite)}%"></i></div><small>Restam <b>${p.lancamento.restam}</b> de ${p.lancamento.limite} peças com desconto.</small></div>` : ''}
+        ${p.lancamento ? `<div class="launch-box"><b>Promoção de lançamento: ${brl(p.lancamento.precoLancamento)} (−${p.lancamento.desconto}%)</b><div class="left"><i style="width:${Math.max(4, 100 * p.lancamento.restam / p.lancamento.limite)}%"></i></div><small>Restam <b>${p.lancamento.restam}</b> de ${p.lancamento.limite} peças com desconto.</small></div>` : ''}
         <p class="pix-note">No Pix: <b>${brl(round2(priceOf(p) * D.loja.entradaPct / 100))}</b> de entrada (${D.loja.entradaPct}%) ou o valor total.</p>
         ${p.cores.length ? `<div class="opt"><span>COR</span><div class="chips" data-group="cor">${p.cores.map((c, i) => `<button class="${i ? '' : 'on'}" data-v="${esc(c)}">${esc(c)}</button>`).join('')}</div></div>` : ''}
         ${p.tamanhos.length ? `<div class="opt"><span>TAMANHO</span><div class="chips" data-group="tam">${p.tamanhos.map((t) => `<button data-v="${esc(t)}">${esc(t)}</button>`).join('')}</div></div>` : ''}
