@@ -9,6 +9,8 @@ const brl = (n) => (Number(n) || 0).toLocaleString('pt-BR', { style: 'currency',
 const round2 = (n) => Math.round(n * 100) / 100;
 
 let D = null; // dados da loja
+let fbMod = null, user = null, orderUnsub = null;
+const fb = async () => (fbMod ||= await import('./fb.js'));
 const store = {
   get(k, d) { try { return JSON.parse(localStorage.getItem(k)) ?? d; } catch { return d; } },
   set(k, v) { try { localStorage.setItem(k, JSON.stringify(v)); } catch { /* sem armazenamento */ } },
@@ -271,6 +273,8 @@ function checkout() {
           <h3>Seus dados</h3>
           ${f('nome', 'Nome completo', 'required autocomplete="name"')}
           ${f('whats', 'WhatsApp', 'required inputmode="tel" autocomplete="tel" placeholder="(66) 9 9999-9999"')}
+          ${f('email', 'E-mail (para acompanhar o pedido)', 'type="email" autocomplete="email"')}
+          <p class="muted small" id="coConta">${user ? `Comprando como <b>${esc(user.email)}</b>. O pedido fica em Minha conta.` : 'Tem conta? <a href="#/conta?volta=checkout" class="gold-text">Entre</a> para acompanhar seus pedidos (ou compre sem conta).'}</p>
           <h3>Entrega</h3>
           <div class="two">${f('cep', 'CEP', 'required inputmode="numeric" autocomplete="postal-code"')}${f('numero', 'Número', 'required')}</div>
           ${f('rua', 'Rua', 'required autocomplete="address-line1"')}
@@ -287,7 +291,7 @@ function checkout() {
           <label class="pay"><input type="radio" name="modo" value="entrada" checked><span><b>Entrada de ${pct}%: ${brl(entrada)}</b><small>O restante (${brl(round2(sub - entrada))}) antes do envio.</small></span></label>
           <label class="pay"><input type="radio" name="modo" value="total"><span><b>Pagamento total: ${brl(sub)}</b><small>Quitado agora.</small></span></label>
           <button class="btn gold block">GERAR PIX DO PEDIDO</button>
-          <p class="muted small">Depois do Pix, envie o comprovante no WhatsApp. O pedido vai pronto na mensagem.</p>
+          <p class="muted small">Depois do Pix, envie o comprovante no WhatsApp. Você recebe um link para acompanhar o pedido e a produção.</p>
         </div>
       </form>
     </section>`;
@@ -309,7 +313,9 @@ function bindCheckout() {
       form.numero.focus();
     } catch { /* sem internet: preenche à mão */ }
   });
-  form.addEventListener('submit', (e) => {
+  // conta logada: completa os dados com o cadastro
+  if (user) fb().then((F) => F.perfil()).then((p) => { if (!p) return; for (const k of ['nome', 'whats', 'email', 'cep', 'numero', 'rua', 'bairro', 'complemento', 'cidade', 'uf']) if (form[k] && !form[k].value && p[k]) form[k].value = p[k]; }).catch(() => {});
+  form.addEventListener('submit', async (e) => {
     e.preventDefault();
     const fd = Object.fromEntries(new FormData(form));
     const missing = ['nome', 'whats', 'cep', 'numero', 'rua', 'bairro', 'cidade', 'uf'].filter((k) => !String(fd[k] || '').trim());
@@ -325,11 +331,28 @@ function bindCheckout() {
       code, at: Date.now(), modo, pct, total: sub, valor, restante: round2(sub - valor), obs, cliente,
       itens: cartLines().map((i) => ({ slug: i.slug, nome: i.p.nome, sku: i.p.sku, tam: i.tam, cor: i.cor, qtd: i.qtd, preco: priceOf(i.p) })),
     };
+    const btn = form.querySelector('button.gold');
+    btn.disabled = true; btn.textContent = 'GERANDO PEDIDO…';
     const pedidos = store.get('ekk-pedidos', []);
-    pedidos.unshift(pedido);
-    store.set('ekk-pedidos', pedidos.slice(0, 30));
-    cart = []; saveCart();
-    location.hash = `#/pedido/${code}`;
+    try {
+      const F = await fb();
+      const id = await F.criarPedido({
+        code, modo, pct, subtotal: sub, frete: 0, total: sub, valorPix: valor, obs, cliente,
+        itens: pedido.itens,
+      });
+      if (F.currentUser()) F.salvarPerfil(cliente).catch(() => {});
+      pedidos.unshift({ id, code, at: pedido.at, total: sub, itens: pedido.itens });
+      store.set('ekk-pedidos', pedidos.slice(0, 30));
+      cart = []; saveCart();
+      location.hash = `#/pedido/${id}`;
+    } catch (err) {
+      // sem conexão com o banco: o pedido fica neste aparelho e segue pelo WhatsApp
+      console.error(err);
+      pedidos.unshift(pedido);
+      store.set('ekk-pedidos', pedidos.slice(0, 30));
+      cart = []; saveCart();
+      location.hash = `#/pedido/${code}`;
+    }
   });
 }
 
@@ -386,13 +409,139 @@ function bindOrder() {
   });
 }
 
+const orderRow = (o, st) => `<a class="order-row" href="#/pedido/${esc(o.id || o.code)}"><b>${esc(o.code)}</b><span>${new Date(o.criadoMs || o.at).toLocaleDateString('pt-BR')}</span><span>${o.itens.reduce((n, i) => n + i.qtd, 0)} peça(s)${st ? ` · <em class="st st-${esc(o.status)}">${esc(st(o.status))}</em>` : ''}</span><b class="gold-text">${brl(o.total)}</b></a>`;
+
 function ordersPage() {
-  const list = store.get('ekk-pedidos', []);
+  return `<section class="section page-top" id="ordersView"><div class="sec-head"><span class="kicker">✦ MEUS PEDIDOS</span><h2>SEUS PEDIDOS</h2></div><p class="center muted">Carregando…</p></section>`;
+}
+async function bindOrders() {
+  const box = $('#ordersView');
+  const local = store.get('ekk-pedidos', []);
+  let remote = [], F = null;
+  try { F = await fb(); remote = user ? await F.meusPedidos() : []; } catch { /* sem conexão: só os deste aparelho */ }
+  const ids = new Set(remote.map((o) => o.id));
+  const list = [...remote, ...local.filter((o) => !o.id || !ids.has(o.id))];
+  if (!box.isConnected) return;
+  box.innerHTML = `<div class="sec-head"><span class="kicker">✦ MEUS PEDIDOS</span><h2>SEUS PEDIDOS</h2>${user ? '' : '<p><a class="gold-text" href="#/conta">Entre na sua conta</a> para ver pedidos feitos em outros aparelhos.</p>'}</div>
+    ${list.length ? `<div class="orders">${list.map((o) => orderRow(o, o.status && F?.statusLabel)).join('')}</div>` : '<p class="center muted">Nenhum pedido ainda.</p>'}`;
+}
+
+const ETAPAS = [['feito', 'Pedido feito'], ['pagamento', 'Pagamento'], ['em_producao', 'Em produção'], ['pronto', 'Pronto'], ['enviado', 'Enviado'], ['entregue', 'Entregue']];
+function etapaAtual(st) {
+  return { aguardando_pagamento: 0, entrada_paga: 1, pago: 1, em_producao: 2, pronto: 3, enviado: 4, entregue: 5 }[st] ?? 0;
+}
+function orderView(o, F) {
+  const falta = round2(o.total - (o.pago || 0));
+  const devido = o.status === 'cancelado' ? 0 : o.status === 'aguardando_pagamento' ? o.valorPix : falta;
+  const pix = devido > 0 && D.loja.pix?.chave ? pixPayload({ ...D.loja.pix, valor: devido, txid: o.code }) : '';
+  const msgO = { ...o, valor: devido, restante: round2(falta - devido) };
+  const wa = D.loja.whatsapp ? `https://wa.me/${D.loja.whatsapp}?text=${encodeURIComponent(orderMessage(msgO) + `\n\nAcompanhar: ${location.origin}/#/pedido/${o.id}`)}` : '';
+  const at = etapaAtual(o.status);
+  const prazo = o.prazoEntrega ? new Date(o.prazoEntrega).toLocaleDateString('pt-BR', { day: '2-digit', month: 'long' }) : '';
   return `
-    <section class="section page-top">
-      <div class="sec-head"><span class="kicker">✦ MEUS PEDIDOS</span><h2>FEITOS NESTE APARELHO</h2></div>
-      ${list.length ? `<div class="orders">${list.map((o) => `<a class="order-row" href="#/pedido/${esc(o.code)}"><b>${esc(o.code)}</b><span>${new Date(o.at).toLocaleDateString('pt-BR')}</span><span>${o.itens.reduce((n, i) => n + i.qtd, 0)} peça(s)</span><b class="gold-text">${brl(o.total)}</b></a>`).join('')}</div>` : '<p class="center muted">Nenhum pedido ainda.</p>'}
-    </section>`;
+    <div class="sec-head"><span class="kicker">✦ PEDIDO ${esc(o.code)}</span><h2>${esc(F.statusLabel(o.status).toUpperCase())}</h2>
+      <p>${prazo ? `Previsão de entrega: <b class="gold-text">${prazo}</b>` : o.status === 'aguardando_pagamento' ? `A produção começa quando o Pix ${o.modo === 'total' ? '' : 'da entrada '}for confirmado.${D.loja.prazoProducao ? ` ${esc(D.loja.prazoProducao)}.` : ''}` : 'Previsão de entrega em breve.'}</p></div>
+    ${o.status === 'cancelado' ? '<p class="center muted">Este pedido foi cancelado.</p>' : `<ol class="track">${ETAPAS.map(([, l], i) => `<li class="${i < at ? 'done' : i === at ? 'now' : ''}"><i></i><span>${l}</span></li>`).join('')}</ol>`}
+    ${o.rastreio ? `<p class="center">Rastreio: <b>${esc(o.rastreio)}</b></p>` : ''}
+    <div class="order-sum">
+      <div><span>Total</span><b>${brl(o.total)}</b></div>
+      <div><span>Pago</span><b class="gold-text">${brl(o.pago || 0)}</b></div>
+      <div><span>Falta</span><b>${brl(Math.max(0, falta))}</b></div>
+    </div>
+    ${pix ? `
+    <div class="pix-box">
+      <div class="qr">${qrSVG(pix, 240)}</div>
+      <div class="pix-side">
+        <h3>${o.status === 'aguardando_pagamento' ? (o.modo === 'total' ? 'Pague o total no Pix' : `Pague a entrada de ${o.pct}% no Pix`) : 'Pague o restante no Pix'}: <span class="gold-text">${brl(devido)}</span></h3>
+        <ol class="mini-steps"><li>Abra o app do seu banco: <b>Pix → Ler QR Code</b> ou <b>Pix copia e cola</b>.</li><li>Confira o valor e o recebedor <b>${esc(D.loja.pix.nome)}</b>.</li><li>Envie o comprovante ${wa ? 'no WhatsApp' : 'por e-mail'}.</li></ol>
+        <label class="f"><span>Pix copia e cola</span><textarea readonly rows="3" id="pixCode">${esc(pix)}</textarea></label>
+        <button class="btn outline block" id="copyPix">COPIAR CÓDIGO PIX</button>
+        ${wa ? `<a class="btn gold block" href="${esc(wa)}" target="_blank" rel="noopener">ENVIAR PEDIDO E COMPROVANTE NO WHATSAPP</a>` : ''}
+      </div>
+    </div>` : ''}
+    <div class="order-items">${o.itens.map((i) => `<div class="sum-line"><span>${i.qtd}× ${esc(i.nome)} <small>${esc([i.tam, i.cor].filter(Boolean).join(' · '))}</small></span><b>${brl(i.preco * i.qtd)}</b></div>`).join('')}
+      <div class="sum-line total"><span>Total do pedido</span><b>${brl(o.total)}</b></div></div>
+    <p class="center muted small">Guarde este link para acompanhar: <a class="gold-text" href="#/pedido/${esc(o.id)}">${esc(location.origin)}/#/pedido/${esc(o.id)}</a>${user ? '' : ' · ou <a class="gold-text" href="#/conta">crie sua conta</a>'}</p>`;
+}
+async function bindOrderLive(key) {
+  const box = $('#orderView');
+  if (store.get('ekk-pedidos', []).some((x) => x.code === key && !x.id)) { box.outerHTML = orderPage(key); bindOrder(); return; }
+  try {
+    const F = await fb();
+    orderUnsub = F.acompanhar(key, (o) => {
+      if (!box.isConnected) return;
+      if (o === undefined) { box.innerHTML = '<p class="center muted">Sem conexão. Tente de novo em instantes.</p>'; return; }
+      if (!o) { box.innerHTML = '<div class="center"><h2>Pedido não encontrado</h2><a class="btn outline" href="#/">VOLTAR</a></div>'; return; }
+      box.innerHTML = orderView(o, F);
+      bindOrder();
+    });
+  } catch { box.innerHTML = '<p class="center muted">Sem conexão. Tente de novo em instantes.</p>'; }
+}
+
+// ---------- conta do cliente ----------
+function accountPage() { return '<section class="section page-top account" id="acct"><p class="center muted">Carregando…</p></section>'; }
+async function bindAccount(q) {
+  const box = $('#acct');
+  const F = await fb();
+  const volta = q.get('volta');
+  if (!F.currentUser()) {
+    box.innerHTML = `<div class="sec-head"><span class="kicker">✦ SUA CONTA</span><h2>ENTRAR</h2><p>Acompanhe seus pedidos e a produção das suas peças.</p></div>
+      <div class="acct-grid">
+        <form class="acct-card" id="fLogin" novalidate><h3>Já tenho conta</h3>
+          <label class="f"><span>E-mail</span><input name="email" type="email" autocomplete="email" required></label>
+          <label class="f"><span>Senha</span><input name="senha" type="password" autocomplete="current-password" required></label>
+          <button class="btn gold block">ENTRAR</button>
+          <button type="button" class="link-btn" id="forgot">Esqueci minha senha</button>
+        </form>
+        <form class="acct-card" id="fSign" novalidate><h3>Criar conta</h3>
+          <label class="f"><span>Nome completo</span><input name="nome" autocomplete="name" required></label>
+          <label class="f"><span>WhatsApp</span><input name="whats" inputmode="tel" autocomplete="tel" required></label>
+          <label class="f"><span>E-mail</span><input name="email" type="email" autocomplete="email" required></label>
+          <label class="f"><span>Senha (mínimo 6)</span><input name="senha" type="password" autocomplete="new-password" minlength="6" required></label>
+          <button class="btn outline block">CRIAR CONTA</button>
+        </form>
+      </div>`;
+    const done = () => { location.hash = volta === 'checkout' ? '#/checkout' : '#/conta'; if (volta !== 'checkout') bindAccount(new URLSearchParams()); };
+    $('#fLogin').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const f = e.target;
+      try { await F.entrar(f.email.value, f.senha.value); toast('Bem-vindo de volta!'); done(); } catch (err) { toast(err.message); }
+    });
+    $('#fSign').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const f = e.target;
+      if (!f.nome.value.trim() || !f.whats.value.trim()) { toast('Preencha nome e WhatsApp.'); return; }
+      try { await F.criarConta({ nome: f.nome.value.trim(), whats: f.whats.value.trim(), email: f.email.value, senha: f.senha.value }); toast('Conta criada!'); done(); } catch (err) { toast(err.message); }
+    });
+    $('#forgot').addEventListener('click', async () => {
+      const email = $('#fLogin').email.value;
+      if (!email) { toast('Digite seu e-mail acima.'); return; }
+      try { await F.esqueci(email); toast('Enviamos um link para criar nova senha no seu e-mail.'); } catch (err) { toast(err.message); }
+    });
+    return;
+  }
+  const [p, pedidos] = await Promise.all([F.perfil(), F.meusPedidos().catch(() => [])]);
+  if (!box.isConnected) return;
+  const v = (k) => esc(p?.[k] || '');
+  box.innerHTML = `<div class="sec-head"><span class="kicker">✦ MINHA CONTA</span><h2>OLÁ, ${esc((p?.nome || user.email).split(' ')[0].toUpperCase())}</h2><p>${esc(user.email)}</p></div>
+    <div class="acct-grid">
+      <div class="acct-card"><h3>Meus pedidos</h3>${pedidos.length ? `<div class="orders">${pedidos.map((o) => orderRow(o, F.statusLabel)).join('')}</div>` : '<p class="muted">Nenhum pedido ainda. <a class="gold-text" href="#/colecao">Ver coleção</a></p>'}</div>
+      <form class="acct-card" id="fPerfil"><h3>Meus dados</h3>
+        <label class="f"><span>Nome</span><input name="nome" value="${v('nome')}"></label>
+        <label class="f"><span>WhatsApp</span><input name="whats" value="${v('whats')}" inputmode="tel"></label>
+        <div class="two"><label class="f"><span>CEP</span><input name="cep" value="${v('cep')}" inputmode="numeric"></label><label class="f"><span>Número</span><input name="numero" value="${v('numero')}"></label></div>
+        <label class="f"><span>Rua</span><input name="rua" value="${v('rua')}"></label>
+        <div class="two"><label class="f"><span>Bairro</span><input name="bairro" value="${v('bairro')}"></label><label class="f"><span>Complemento</span><input name="complemento" value="${v('complemento')}"></label></div>
+        <div class="two"><label class="f"><span>Cidade</span><input name="cidade" value="${v('cidade')}"></label><label class="f"><span>UF</span><input name="uf" value="${v('uf')}" maxlength="2"></label></div>
+        <button class="btn gold block">SALVAR DADOS</button>
+        <button type="button" class="link-btn" id="logout">Sair da conta</button>
+      </form>
+    </div>`;
+  $('#fPerfil').addEventListener('submit', async (e) => {
+    e.preventDefault();
+    try { await F.salvarPerfil(Object.fromEntries(new FormData(e.target))); toast('Dados salvos.'); } catch (err) { toast(err.message); }
+  });
+  $('#logout').addEventListener('click', async () => { await F.sair(); toast('Você saiu da conta.'); location.hash = '#/'; });
 }
 
 // ---------- casca ----------
@@ -415,6 +564,7 @@ function route() {
   const [path, qs = ''] = location.hash.replace(/^#\/?/, '').split('?');
   const q = new URLSearchParams(qs);
   const parts = path.split('/');
+  orderUnsub?.(); orderUnsub = null;
   const old = $('#view');
   const view = old.cloneNode(false); // novo nó: listeners da página anterior somem
   old.replaceWith(view);
@@ -423,8 +573,9 @@ function route() {
   else if (parts[0] === 'colecao') html = collection(q);
   else if (parts[0] === 'produto') { html = productPage(decodeURIComponent(parts[1] || '')); bind = () => bindProduct(decodeURIComponent(parts[1] || '')); }
   else if (parts[0] === 'checkout') { html = checkout(); bind = bindCheckout; }
-  else if (parts[0] === 'pedido') { html = orderPage(parts[1]); bind = bindOrder; }
-  else if (parts[0] === 'pedidos') html = ordersPage();
+  else if (parts[0] === 'pedido') { html = '<section class="section page-top order" id="orderView"><p class="center muted">Carregando pedido…</p></section>'; bind = () => bindOrderLive(decodeURIComponent(parts[1] || '')); }
+  else if (parts[0] === 'pedidos') { html = ordersPage(); bind = bindOrders; }
+  else if (parts[0] === 'conta') { html = accountPage(); bind = () => bindAccount(q); }
   else if (parts[0] === 'como-comprar') html = `<div class="page-top">${howTo()}</div>`;
   else { html = home(); bind = bindPromo; }
   view.innerHTML = html;
@@ -463,4 +614,12 @@ if ('serviceWorker' in navigator) navigator.serviceWorker.register('sw.js').catc
   saveCart();
   chrome();
   route();
+  // conta: carrega o Firebase sem atrasar a página
+  fb().then((F) => F.onUser((u) => {
+    const first = user === null && u === null;
+    user = u;
+    const a = $('#acctBtn');
+    if (a) a.textContent = u ? (u.displayName || 'CONTA').split(' ')[0].toUpperCase() : 'ENTRAR';
+    if (!first && /^#\/(conta|pedidos|checkout)/.test(location.hash)) route();
+  })).catch(() => {});
 })();
