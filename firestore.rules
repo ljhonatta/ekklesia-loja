@@ -7,7 +7,7 @@ service cloud.firestore {
     function signedIn() { return request.auth != null; }
     function isAdmin() {
       return signedIn() && request.auth.token.email_verified == true
-        && request.auth.token.email in ['contato@ekklesiastoreide.com.br'];
+        && request.auth.token.email in ['jhonatta258@gmail.com'];
     }
 
     match /clientes/{uid} {
