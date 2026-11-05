@@ -99,6 +99,43 @@ function card(p) {
 }
 const marquee = (txt) => `<div class="marquee" aria-hidden="true"><div>${`<span>${esc(txt)} ✦ </span>`.repeat(8)}</div></div>`;
 
+// ---------- promoções (carrossel da home) ----------
+function promoSlides() {
+  const L = D.loja, launch = D.produtos.filter((p) => p.lancamento);
+  const min = launch.length ? Math.min(...launch.map((p) => p.lancamento.precoLancamento)) : null;
+  const lim = launch.length ? Math.max(...launch.map((p) => p.lancamento.limite)) : 50;
+  const img = (i) => (launch[i] || D.produtos[i] || launch[0] || D.produtos[0])?.imagens?.[0] || '';
+  const base = [
+    { kicker: 'PROMOÇÃO DE LANÇAMENTO', titulo: min ? `AS ${lim} PRIMEIRAS PEÇAS A PARTIR DE ${brl(min)}` : `PREÇO ESPECIAL NAS ${lim} PRIMEIRAS PEÇAS`, texto: 'Preço de lançamento só para as primeiras peças vendidas de cada modelo.', botao: 'APROVEITAR', link: '#/colecao?f=lancamento', imagem: img(0) },
+    { kicker: 'INAUGURAÇÃO DA LOJA', titulo: 'PROMOÇÃO DE INAUGURAÇÃO EKKLESIA', texto: `Garanta a sua com ${L.entradaPct}% de entrada no Pix ou pague o valor total.`, botao: 'VER PROMOÇÕES', link: '#/colecao', imagem: img(1) },
+    { kicker: 'SOB ENCOMENDA', titulo: 'CONFIRA AS PEÇAS DISPONÍVEIS PARA ENCOMENDA', texto: L.prazoProducao || 'Cada peça é produzida para você.', botao: 'VER COLEÇÃO', link: '#/colecao', imagem: img(2) },
+  ];
+  const list = (L.promos?.length ? L.promos : base).filter((s) => s.titulo);
+  if (!list.length) return '';
+  return `<section class="promo" aria-label="Promoções">
+    <div class="promo-track" id="promoTrack">${list.map((s, i) => `
+      <a class="promo-slide" href="${esc(s.link || '#/colecao')}" aria-label="${esc(s.titulo)}">
+        ${s.imagem ? `<img src="${esc(s.imagem)}" alt="" loading="${i ? 'lazy' : 'eager'}">` : ''}
+        <div class="promo-in"><span class="kicker">✦ ${esc(s.kicker || 'PROMOÇÃO')}</span><h3>${esc(s.titulo)}</h3>${s.texto ? `<p>${esc(s.texto)}</p>` : ''}<span class="btn gold sm">${esc(s.botao || 'VER')}</span></div>
+      </a>`).join('')}</div>
+    ${list.length > 1 ? `<div class="promo-dots">${list.map((_, i) => `<button data-slide="${i}" aria-label="Promoção ${i + 1}"></button>`).join('')}</div>` : ''}
+  </section>`;
+}
+function bindPromo() {
+  const track = $('#promoTrack');
+  if (!track) return;
+  const dots = $$('[data-slide]');
+  const n = track.children.length;
+  let i = 0, timer = 0;
+  const go = (k) => { i = (k + n) % n; track.scrollTo({ left: track.clientWidth * i, behavior: 'smooth' }); };
+  const mark = () => { const k = Math.round(track.scrollLeft / Math.max(1, track.clientWidth)); i = k; dots.forEach((d, j) => d.classList.toggle('on', j === k)); };
+  const start = () => { clearInterval(timer); if (n > 1) timer = setInterval(() => { if (!track.isConnected) clearInterval(timer); else go(i + 1); }, 5000); };
+  track.addEventListener('scroll', () => requestAnimationFrame(mark), { passive: true });
+  track.addEventListener('pointerdown', start);
+  dots.forEach((d) => d.addEventListener('click', () => { go(+d.dataset.slide); start(); }));
+  mark(); start();
+}
+
 // ---------- páginas ----------
 function home() {
   const L = D.loja, launch = D.produtos.filter((p) => p.lancamento);
@@ -117,6 +154,7 @@ function home() {
       </div>
     </section>
     ${marquee(L.faixa || `${D.marca.nome} ✦ MODA COM PROPÓSITO`)}
+    ${promoSlides()}
     ${launch.length ? `
     <section class="section">
       <div class="sec-head"><span class="kicker">✦ PROMOÇÃO DE LANÇAMENTO</span><h2>AS ${Math.max(...launch.map((p) => p.lancamento.limite))} PRIMEIRAS PEÇAS A PARTIR DE ${brl(Math.min(...launch.map((p) => p.lancamento.precoLancamento)))}</h2>
@@ -378,14 +416,14 @@ function route() {
   const view = old.cloneNode(false); // novo nó: listeners da página anterior somem
   old.replaceWith(view);
   let html, bind = () => {};
-  if (!path) html = home();
+  if (!path) { html = home(); bind = bindPromo; }
   else if (parts[0] === 'colecao') html = collection(q);
   else if (parts[0] === 'produto') { html = productPage(decodeURIComponent(parts[1] || '')); bind = () => bindProduct(decodeURIComponent(parts[1] || '')); }
   else if (parts[0] === 'checkout') { html = checkout(); bind = bindCheckout; }
   else if (parts[0] === 'pedido') { html = orderPage(parts[1]); bind = bindOrder; }
   else if (parts[0] === 'pedidos') html = ordersPage();
   else if (parts[0] === 'como-comprar') html = `<div class="page-top">${howTo()}</div>`;
-  else html = home();
+  else { html = home(); bind = bindPromo; }
   view.innerHTML = html;
   bind();
   closeDrawers();

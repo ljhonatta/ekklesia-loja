@@ -245,3 +245,19 @@ p { margin: 0; }
   .order-row { grid-template-columns: 1fr auto; }
   .topbar { font-size: 11px; }
 }
+
+/* carrossel de promoções */
+.promo { position: relative; max-width: 1200px; margin: 28px auto 0; padding: 0 16px; }
+.promo-track { display: flex; overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none; border: 1px solid rgba(212,168,58,.35); }
+.promo-track::-webkit-scrollbar { display: none; }
+.promo-slide { position: relative; flex: 0 0 100%; scroll-snap-align: start; min-height: 260px; display: flex; align-items: flex-end; overflow: hidden; color: #fff; text-decoration: none; background: radial-gradient(120% 120% at 100% 0%, rgba(212,168,58,.25), transparent 60%), #111; }
+.promo-slide img { position: absolute; right: 0; top: 0; height: 100%; width: 55%; object-fit: cover; opacity: .55; -webkit-mask-image: linear-gradient(to right, transparent, #000 45%); mask-image: linear-gradient(to right, transparent, #000 45%); }
+.promo-in { position: relative; padding: 28px; max-width: 620px; display: grid; gap: 10px; justify-items: start; }
+.promo-in .kicker { color: var(--gold); font-size: 12px; letter-spacing: .14em; font-weight: 700; }
+.promo-in h3 { font-family: 'Bebas Neue', sans-serif; font-weight: 400; font-size: clamp(30px, 5vw, 48px); line-height: 1; margin: 0; letter-spacing: .02em; }
+.promo-in p { margin: 0; color: #ddd; }
+.promo-in .btn.sm { padding: 9px 16px; font-size: 13px; }
+.promo-dots { display: flex; justify-content: center; gap: 8px; margin-top: 12px; }
+.promo-dots button { width: 8px; height: 8px; border-radius: 50%; border: 0; padding: 0; background: #555; cursor: pointer; }
+.promo-dots button.on { background: var(--gold); width: 22px; border-radius: 4px; }
+@media (max-width: 640px) { .promo-slide { min-height: 300px; } .promo-slide img { width: 100%; opacity: .3; -webkit-mask-image: none; mask-image: none; } .promo-in { padding: 22px; } }
