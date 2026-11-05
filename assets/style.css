@@ -261,3 +261,5 @@ p { margin: 0; }
 .promo-dots button { width: 8px; height: 8px; border-radius: 50%; border: 0; padding: 0; background: #555; cursor: pointer; }
 .promo-dots button.on { background: var(--gold); width: 22px; border-radius: 4px; }
 @media (max-width: 640px) { .promo-slide { min-height: 300px; } .promo-slide img { width: 100%; opacity: .3; -webkit-mask-image: none; mask-image: none; } .promo-in { padding: 22px; } }
+
+.wa-float[hidden] { display: none; }

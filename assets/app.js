@@ -356,6 +356,9 @@ function orderPage(code) {
   if (!o) return `<section class="section page-top center"><h2>Pedido não encontrado neste aparelho</h2><a class="btn outline" href="#/">VOLTAR</a></section>`;
   const pix = D.loja.pix?.chave ? pixPayload({ ...D.loja.pix, valor: o.valor, txid: o.code }) : '';
   const wa = D.loja.whatsapp ? `https://wa.me/${D.loja.whatsapp}?text=${encodeURIComponent(orderMessage(o))}` : '';
+  // sem WhatsApp cadastrado, o pedido vai por e-mail (chave Pix em e-mail ou contato da loja)
+  const email = (D.loja.pix?.chave || '').includes('@') ? D.loja.pix.chave : 'contato@ekklesiastoreide.com.br';
+  const mail = `mailto:${email}?subject=${encodeURIComponent(`Pedido ${o.code} — ${D.marca.nome}`)}&body=${encodeURIComponent(orderMessage(o))}`;
   return `
     <section class="section page-top order">
       <div class="sec-head"><span class="kicker">✦ PEDIDO ${esc(o.code)}</span><h2>PAGUE NO PIX</h2>
@@ -364,10 +367,10 @@ function orderPage(code) {
       <div class="pix-box">
         <div class="qr">${qrSVG(pix, 240)}</div>
         <div class="pix-side">
-          <ol class="mini-steps"><li>Abra o app do seu banco e escolha <b>Pix → Ler QR Code</b> ou <b>Pix copia e cola</b>.</li><li>Confira o valor de <b>${brl(o.valor)}</b> e o recebedor <b>${esc(D.loja.pix.nome)}</b>.</li><li>Depois de pagar, envie o comprovante no WhatsApp.</li></ol>
+          <ol class="mini-steps"><li>Abra o app do seu banco e escolha <b>Pix → Ler QR Code</b> ou <b>Pix copia e cola</b>.</li><li>Confira o valor de <b>${brl(o.valor)}</b> e o recebedor <b>${esc(D.loja.pix.nome)}</b>.</li><li>Depois de pagar, envie o comprovante ${wa ? 'no WhatsApp' : 'por e-mail'}.</li></ol>
           <label class="f"><span>Pix copia e cola</span><textarea readonly rows="3" id="pixCode">${esc(pix)}</textarea></label>
           <button class="btn outline block" id="copyPix">COPIAR CÓDIGO PIX</button>
-          ${wa ? `<a class="btn gold block" href="${esc(wa)}" target="_blank" rel="noopener">ENVIAR PEDIDO E COMPROVANTE NO WHATSAPP</a>` : ''}
+          ${wa ? `<a class="btn gold block" href="${esc(wa)}" target="_blank" rel="noopener">ENVIAR PEDIDO E COMPROVANTE NO WHATSAPP</a>` : `<a class="btn gold block" href="${esc(mail)}">ENVIAR PEDIDO E COMPROVANTE POR E-MAIL</a><small class="muted">Anexe o comprovante do Pix no e-mail.</small>`}
         </div>
       </div>` : '<p class="center muted">Pagamento indisponível no momento. Fale com a gente no WhatsApp.</p>'}
       <div class="order-items">${o.itens.map((i) => `<div class="sum-line"><span>${i.qtd}× ${esc(i.nome)} <small>${esc([i.tam, i.cor].filter(Boolean).join(' · '))}</small></span><b>${brl(i.preco * i.qtd)}</b></div>`).join('')}

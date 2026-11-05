@@ -1,8 +1,8 @@
 {
- "geradoEm": null,
+ "geradoEm": "2026-11-05T16:02:26.449Z",
  "marca": {
   "nome": "EKKLESIA",
-  "frase": "Vista o que você crê.",
+  "frase": "",
   "apresentacao": "",
   "site": "",
   "instagram": "",
@@ -24,10 +24,313 @@
    "destaque": "EKKLESIA",
    "versiculo": "\"Ide por todo o mundo e pregai o evangelho.\" — Mc 16:15",
    "texto": "Streetwear cristão premium. Cada peça é uma declaração de fé, feita para ser vestida com propósito.",
-   "imagem": null
+   "imagem": "img/p/oversized-8-ou-80-em-cristo-sou-70x7-1.jpg"
   },
   "faixa": "PROMOÇÃO DE LANÇAMENTO NAS 50 PRIMEIRAS PEÇAS ✦ GARANTA COM 50% DE ENTRADA NO PIX OU PAGUE O TOTAL ✦ MODA COM PROPÓSITO",
   "manifesto": "EKKLESIA não é só uma loja. É um movimento. Cada peça que você veste é uma declaração: você não compra roupa, você veste um propósito."
  },
- "produtos": []
+ "produtos": [
+  {
+   "slug": "oversized-maranata-a-igreja-clama",
+   "sku": "EKK-009",
+   "nome": "Oversized Maranata · A Igreja Clama",
+   "categoria": "Oversized",
+   "genero": "Unissex",
+   "versiculo": "Ap 22:20",
+   "descricao": "\"Ora, vem, Senhor Jesus!\" Maranata: a Igreja clama. Arte em off-white com traço vermelho, nas costas.\n\nOversized padrão EKKLESIA: malha 100% algodão, ombro caído, gola canelada e corpo amplo.\nTamanhos: M, G e GG.\n\nPeça sob encomenda: garanta a sua com 50% de entrada no Pix ou pague o valor total.",
+   "material": "Malha 100% algodão",
+   "gramatura": "",
+   "tecnica": "Serigrafia",
+   "cores": [
+    "Preta"
+   ],
+   "tamanhos": [
+    "M",
+    "G",
+    "GG"
+   ],
+   "medidas": {},
+   "preco": 149.99,
+   "disponibilidade": "pre-venda",
+   "lancamento": {
+    "desconto": 13,
+    "limite": 50,
+    "restam": 50,
+    "precoLancamento": 129.99
+   },
+   "imagens": [
+    "img/p/oversized-maranata-a-igreja-clama-1.jpg"
+   ],
+   "atualizado": 1793894147807
+  },
+  {
+   "slug": "oversized-kenosis-esvaziou-se-a-si-mesmo",
+   "sku": "EKK-008",
+   "nome": "Oversized Kenosis · Esvaziou-se a Si Mesmo",
+   "categoria": "Oversized",
+   "genero": "Unissex",
+   "versiculo": "Fp 2:7-8",
+   "descricao": "Kenosis: Cristo esvaziou-se a si mesmo, tomando a forma de servo. Ilustração em gravura com raios dourados, nas costas.\n\nOversized padrão EKKLESIA: malha 100% algodão, ombro caído, gola canelada e corpo amplo.\nTamanhos: M, G e GG.\n\nPeça sob encomenda: garanta a sua com 50% de entrada no Pix ou pague o valor total.",
+   "material": "Malha 100% algodão",
+   "gramatura": "",
+   "tecnica": "DTF",
+   "cores": [
+    "Preta"
+   ],
+   "tamanhos": [
+    "M",
+    "G",
+    "GG"
+   ],
+   "medidas": {},
+   "preco": 149.99,
+   "disponibilidade": "pre-venda",
+   "lancamento": {
+    "desconto": 13,
+    "limite": 50,
+    "restam": 50,
+    "precoLancamento": 129.99
+   },
+   "imagens": [
+    "img/p/oversized-kenosis-esvaziou-se-a-si-mesmo-1.jpg"
+   ],
+   "atualizado": 1793894147806
+  },
+  {
+   "slug": "oversized-ekklesia-essencial-logo-no-peito",
+   "sku": "EKK-007",
+   "nome": "Oversized EKKLESIA Essencial · Logo no Peito",
+   "categoria": "Oversized",
+   "genero": "Unissex",
+   "versiculo": "Mt 16:18",
+   "descricao": "\"Sobre esta pedra edificarei a minha igreja.\" O essencial da marca: logo EKKLESIA bordado no peito. Disponível em preto e branco.\n\nOversized padrão EKKLESIA: malha 100% algodão, ombro caído, gola canelada e corpo amplo.\nTamanhos: M, G e GG.\n\nPeça sob encomenda: garanta a sua com 50% de entrada no Pix ou pague o valor total.",
+   "material": "Malha 100% algodão",
+   "gramatura": "",
+   "tecnica": "Bordado",
+   "cores": [
+    "Preta",
+    "Branca"
+   ],
+   "tamanhos": [
+    "M",
+    "G",
+    "GG"
+   ],
+   "medidas": {},
+   "preco": 149.99,
+   "disponibilidade": "pre-venda",
+   "lancamento": {
+    "desconto": 13,
+    "limite": 50,
+    "restam": 50,
+    "precoLancamento": 129.99
+   },
+   "imagens": [
+    "img/p/oversized-ekklesia-essencial-logo-no-peito-1.jpg",
+    "img/p/oversized-ekklesia-essencial-logo-no-peito-2.jpg",
+    "img/p/oversized-ekklesia-essencial-logo-no-peito-3.jpg",
+    "img/p/oversized-ekklesia-essencial-logo-no-peito-4.jpg",
+    "img/p/oversized-ekklesia-essencial-logo-no-peito-5.jpg"
+   ],
+   "atualizado": 1793894147805
+  },
+  {
+   "slug": "oversized-ekk-espada",
+   "sku": "EKK-006",
+   "nome": "Oversized EKK Espada",
+   "categoria": "Oversized",
+   "genero": "Unissex",
+   "versiculo": "Ef 6:17",
+   "descricao": "A espada do Espírito, que é a Palavra de Deus. Monograma EKK com espada no peito esquerdo, minimalista.\n\nOversized padrão EKKLESIA: malha 100% algodão, ombro caído, gola canelada e corpo amplo.\nTamanhos: M, G e GG.\n\nPeça sob encomenda: garanta a sua com 50% de entrada no Pix ou pague o valor total.",
+   "material": "Malha 100% algodão",
+   "gramatura": "",
+   "tecnica": "Bordado",
+   "cores": [
+    "Preta"
+   ],
+   "tamanhos": [
+    "M",
+    "G",
+    "GG"
+   ],
+   "medidas": {},
+   "preco": 149.99,
+   "disponibilidade": "pre-venda",
+   "lancamento": {
+    "desconto": 13,
+    "limite": 50,
+    "restam": 50,
+    "precoLancamento": 129.99
+   },
+   "imagens": [
+    "img/p/oversized-ekk-espada-1.jpg"
+   ],
+   "atualizado": 1793894147804
+  },
+  {
+   "slug": "oversized-ekklesia-chamados-para-fora",
+   "sku": "EKK-005",
+   "nome": "Oversized EKKLESIA · Chamados para Fora",
+   "categoria": "Oversized",
+   "genero": "Unissex",
+   "versiculo": "1 Pe 2:9",
+   "descricao": "EKKLESIA: os chamados para fora. Logo grande no peito, para quem carrega a identidade da Igreja.\n\nOversized padrão EKKLESIA: malha 100% algodão, ombro caído, gola canelada e corpo amplo.\nTamanhos: M, G e GG.\n\nPeça sob encomenda: garanta a sua com 50% de entrada no Pix ou pague o valor total.",
+   "material": "Malha 100% algodão",
+   "gramatura": "",
+   "tecnica": "Serigrafia",
+   "cores": [
+    "Preta"
+   ],
+   "tamanhos": [
+    "M",
+    "G",
+    "GG"
+   ],
+   "medidas": {},
+   "preco": 149.99,
+   "disponibilidade": "pre-venda",
+   "lancamento": {
+    "desconto": 13,
+    "limite": 50,
+    "restam": 50,
+    "precoLancamento": 129.99
+   },
+   "imagens": [
+    "img/p/oversized-ekklesia-chamados-para-fora-1.jpg"
+   ],
+   "atualizado": 1793894147803
+  },
+  {
+   "slug": "oversized-me-encontrou-por-detras-das-malhadas",
+   "sku": "EKK-004",
+   "nome": "Oversized Me Encontrou por Detrás das Malhadas",
+   "categoria": "Oversized",
+   "genero": "Unissex",
+   "versiculo": "2 Sm 7:8",
+   "descricao": "\"Tirei-te de detrás das ovelhas para que fosses príncipe sobre o meu povo.\" A ovelha campeã: fé e força. Estampa grande nas costas.\n\nOversized padrão EKKLESIA: malha 100% algodão, ombro caído, gola canelada e corpo amplo.\nTamanhos: M, G e GG.\n\nPeça sob encomenda: garanta a sua com 50% de entrada no Pix ou pague o valor total.",
+   "material": "Malha 100% algodão",
+   "gramatura": "",
+   "tecnica": "DTF",
+   "cores": [
+    "Preta"
+   ],
+   "tamanhos": [
+    "M",
+    "G",
+    "GG"
+   ],
+   "medidas": {},
+   "preco": 149.99,
+   "disponibilidade": "pre-venda",
+   "lancamento": {
+    "desconto": 13,
+    "limite": 50,
+    "restam": 50,
+    "precoLancamento": 129.99
+   },
+   "imagens": [
+    "img/p/oversized-me-encontrou-por-detras-das-malhadas-1.jpg"
+   ],
+   "atualizado": 1793894147802
+  },
+  {
+   "slug": "oversized-jeova-nissi-minha-bandeira",
+   "sku": "EKK-003",
+   "nome": "Oversized Jeová Nissi · Minha Bandeira",
+   "categoria": "Oversized",
+   "genero": "Unissex",
+   "versiculo": "Êx 17:15",
+   "descricao": "Jeová Nissi: o Senhor é a minha bandeira. Tipografia forte com a bandeira do Brasil, estampa grande nas costas.\n\nOversized padrão EKKLESIA: malha 100% algodão, ombro caído, gola canelada e corpo amplo.\nTamanhos: M, G e GG.\n\nPeça sob encomenda: garanta a sua com 50% de entrada no Pix ou pague o valor total.",
+   "material": "Malha 100% algodão",
+   "gramatura": "",
+   "tecnica": "DTF",
+   "cores": [
+    "Preta"
+   ],
+   "tamanhos": [
+    "M",
+    "G",
+    "GG"
+   ],
+   "medidas": {},
+   "preco": 149.99,
+   "disponibilidade": "pre-venda",
+   "lancamento": {
+    "desconto": 13,
+    "limite": 50,
+    "restam": 50,
+    "precoLancamento": 129.99
+   },
+   "imagens": [
+    "img/p/oversized-jeova-nissi-minha-bandeira-1.jpg"
+   ],
+   "atualizado": 1793894147801
+  },
+  {
+   "slug": "oversized-nossas-dores-o-cordeiro",
+   "sku": "EKK-002",
+   "nome": "Oversized Nossas Dores · O Cordeiro",
+   "categoria": "Oversized",
+   "genero": "Unissex",
+   "versiculo": "Is 53:5",
+   "descricao": "\"Mas ele foi ferido por nossas transgressões.\" O Cordeiro que foi imolado levou sobre si as nossas dores. Arte ilustrada em alta definição nas costas.\n\nOversized padrão EKKLESIA: malha 100% algodão, ombro caído, gola canelada e corpo amplo.\nTamanhos: M, G e GG.\n\nPeça sob encomenda: garanta a sua com 50% de entrada no Pix ou pague o valor total.",
+   "material": "Malha 100% algodão",
+   "gramatura": "",
+   "tecnica": "DTF",
+   "cores": [
+    "Preta"
+   ],
+   "tamanhos": [
+    "M",
+    "G",
+    "GG"
+   ],
+   "medidas": {},
+   "preco": 149.99,
+   "disponibilidade": "pre-venda",
+   "lancamento": {
+    "desconto": 13,
+    "limite": 50,
+    "restam": 50,
+    "precoLancamento": 129.99
+   },
+   "imagens": [
+    "img/p/oversized-nossas-dores-o-cordeiro-1.jpg"
+   ],
+   "atualizado": 1793894147800
+  },
+  {
+   "slug": "oversized-8-ou-80-em-cristo-sou-70x7",
+   "sku": "EKK-001",
+   "nome": "Oversized 8 ou 80 · Em Cristo Sou 70x7",
+   "categoria": "Oversized",
+   "genero": "Unissex",
+   "versiculo": "Mt 18:22",
+   "descricao": "No mundo eu era 8 ou 80. Agora, em Cristo, sou 70x7: perdoado para perdoar. Estampa grande nas costas em branco e amarelo.\n\nOversized padrão EKKLESIA: malha 100% algodão, ombro caído, gola canelada e corpo amplo.\nTamanhos: M, G e GG.\n\nPeça sob encomenda: garanta a sua com 50% de entrada no Pix ou pague o valor total.",
+   "material": "Malha 100% algodão",
+   "gramatura": "",
+   "tecnica": "DTF",
+   "cores": [
+    "Preta"
+   ],
+   "tamanhos": [
+    "M",
+    "G",
+    "GG"
+   ],
+   "medidas": {},
+   "preco": 149.99,
+   "disponibilidade": "pre-venda",
+   "lancamento": {
+    "desconto": 13,
+    "limite": 50,
+    "restam": 50,
+    "precoLancamento": 129.99
+   },
+   "imagens": [
+    "img/p/oversized-8-ou-80-em-cristo-sou-70x7-1.jpg"
+   ],
+   "atualizado": 1793894147799
+  }
+ ]
 }
