@@ -1,5 +1,5 @@
 {
- "geradoEm": "2026-11-06T00:34:06.899Z",
+ "geradoEm": "2026-11-06T00:37:15.605Z",
  "marca": {
   "nome": "EKKLESIA",
   "frase": "",
@@ -30,6 +30,43 @@
   "manifesto": "EKKLESIA não é só uma loja. É um movimento. Cada peça que você veste é uma declaração: você não compra roupa, você veste um propósito."
  },
  "produtos": [
+  {
+   "slug": "oversized-logotipo-ekklesia-com-faixa-curva",
+   "sku": "EKK-011",
+   "nome": "Oversized Logótipo Ekklesia Com Faixa Curva",
+   "categoria": "Oversized",
+   "genero": "Feminino",
+   "versiculo": "",
+   "descricao": "Oversized feminina: caimento amplo e confortável, ombro caído, malha 100% algodão.\n\nPeça sob encomenda: garanta a sua com 50% de entrada no Pix ou pague o valor total.",
+   "material": "Malha 100% algodão",
+   "gramatura": "",
+   "tecnica": "DTF",
+   "cores": [
+    "Off-white",
+    "Bege",
+    "Azul-marinho",
+    "Azul royal",
+    "Preta"
+   ],
+   "tamanhos": [
+    "M",
+    "G",
+    "GG"
+   ],
+   "medidas": {},
+   "preco": 149.99,
+   "disponibilidade": "pre-venda",
+   "lancamento": {
+    "desconto": 13,
+    "limite": 50,
+    "restam": 50,
+    "precoLancamento": 129.99
+   },
+   "imagens": [
+    "img/p/oversized-logotipo-ekklesia-com-faixa-curva-1.jpg"
+   ],
+   "atualizado": 1793925140840
+  },
   {
    "slug": "oversized-ekk-espada-copia",
    "sku": "EKK-010",
