@@ -1,5 +1,5 @@
 {
- "geradoEm": "2026-11-06T00:43:42.844Z",
+ "geradoEm": "2026-11-06T00:46:19.875Z",
  "marca": {
   "nome": "EKKLESIA",
   "frase": "",
@@ -63,9 +63,12 @@
     "precoLancamento": 129.99
    },
    "imagens": [
-    "img/p/oversized-logotipo-ekk-com-espada-gotica-1.jpg"
+    "img/p/oversized-logotipo-ekk-com-espada-gotica-1.jpg",
+    "img/p/oversized-logotipo-ekk-com-espada-gotica-2.jpg",
+    "img/p/oversized-logotipo-ekk-com-espada-gotica-3.jpg",
+    "img/p/oversized-logotipo-ekk-com-espada-gotica-4.jpg"
    ],
-   "atualizado": 1793925804913
+   "atualizado": 1793925849926
   },
   {
    "slug": "oversized-logotipo-ekklesia-com-faixa-curva",
