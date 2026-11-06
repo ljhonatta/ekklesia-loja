@@ -1,5 +1,5 @@
 {
- "geradoEm": "2026-11-06T00:49:07.020Z",
+ "geradoEm": "2026-11-06T00:58:31.078Z",
  "marca": {
   "nome": "EKKLESIA",
   "frase": "",
@@ -32,7 +32,7 @@
  "produtos": [
   {
    "slug": "oversized-kenosis-esvaziou-se-a-si-mesmo-2",
-   "sku": "EKK-016",
+   "sku": "EKK-018",
    "nome": "Oversized Kenosis · Esvaziou-Se A Si Mesmo",
    "categoria": "Oversized",
    "genero": "Feminino",
@@ -42,10 +42,10 @@
    "gramatura": "",
    "tecnica": "DTF",
    "cores": [
-    "Bege",
     "Off-white",
-    "Azul royal",
-    "Preta"
+    "Bege",
+    "Preta",
+    "Azul royal"
    ],
    "tamanhos": [
     "M",
@@ -68,45 +68,7 @@
     "img/p/oversized-kenosis-esvaziou-se-a-si-mesmo-2-4.jpg",
     "img/p/oversized-kenosis-esvaziou-se-a-si-mesmo-2-5.jpg"
    ],
-   "atualizado": 1793926133217
-  },
-  {
-   "slug": "camiseta-maranata-a-igreja-clama",
-   "sku": "EKK-015",
-   "nome": "Camiseta Maranata · A Igreja Clama",
-   "categoria": "Camiseta feminina",
-   "genero": "Feminino",
-   "versiculo": "",
-   "descricao": "Camiseta Tech (TSH) feminina: manga curta, caimento mais ajustado e toque leve.\n\nPeça sob encomenda: garanta a sua com 50% de entrada no Pix ou pague o valor total.",
-   "material": "Malha 100% algodão",
-   "gramatura": "",
-   "tecnica": "DTF",
-   "cores": [
-    "Rosa claro",
-    "Pink",
-    "Verde-água"
-   ],
-   "tamanhos": [
-    "P",
-    "M",
-    "G",
-    "GG"
-   ],
-   "medidas": {},
-   "preco": 209.99,
-   "disponibilidade": "pre-venda",
-   "lancamento": {
-    "desconto": 14,
-    "limite": 50,
-    "restam": 50,
-    "precoLancamento": 179.99
-   },
-   "imagens": [
-    "img/p/camiseta-maranata-a-igreja-clama-1.jpg",
-    "img/p/camiseta-maranata-a-igreja-clama-2.jpg",
-    "img/p/camiseta-maranata-a-igreja-clama-3.jpg"
-   ],
-   "atualizado": 1793925990031
+   "atualizado": 1793926704030
   },
   {
    "slug": "oversized-logotipo-ekk-com-espada-gotica",
@@ -142,11 +104,9 @@
    },
    "imagens": [
     "img/p/oversized-logotipo-ekk-com-espada-gotica-1.jpg",
-    "img/p/oversized-logotipo-ekk-com-espada-gotica-2.jpg",
-    "img/p/oversized-logotipo-ekk-com-espada-gotica-3.jpg",
-    "img/p/oversized-logotipo-ekk-com-espada-gotica-4.jpg"
+    "img/p/oversized-logotipo-ekk-com-espada-gotica-2.jpg"
    ],
-   "atualizado": 1793925849926
+   "atualizado": 1793925740718
   },
   {
    "slug": "oversized-logotipo-ekklesia-com-faixa-curva",
