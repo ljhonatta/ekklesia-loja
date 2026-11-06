@@ -1,5 +1,5 @@
 {
- "geradoEm": "2026-11-05T21:42:19.998Z",
+ "geradoEm": "2026-11-06T00:31:06.615Z",
  "marca": {
   "nome": "EKKLESIA",
   "frase": "",
@@ -30,6 +30,40 @@
   "manifesto": "EKKLESIA não é só uma loja. É um movimento. Cada peça que você veste é uma declaração: você não compra roupa, você veste um propósito."
  },
  "produtos": [
+  {
+   "slug": "oversized-ekk-espada-copia",
+   "sku": "EKK-010",
+   "nome": "Oversized Maranata",
+   "categoria": "Oversized",
+   "genero": "Unissex",
+   "versiculo": "Ef 6:17",
+   "descricao": "A espada do Espírito, que é a Palavra de Deus. Monograma EKK com espada no peito esquerdo, minimalista.\n\nOversized padrão EKKLESIA: malha 100% algodão, ombro caído, gola canelada e corpo amplo.\nTamanhos: M, G e GG.\n\nPeça sob encomenda: garanta a sua com 50% de entrada no Pix ou pague o valor total.",
+   "material": "Malha 100% algodão",
+   "gramatura": "",
+   "tecnica": "Bordado",
+   "cores": [
+    "Preta"
+   ],
+   "tamanhos": [
+    "M",
+    "G",
+    "GG"
+   ],
+   "medidas": {},
+   "preco": 149.99,
+   "disponibilidade": "pre-venda",
+   "lancamento": {
+    "desconto": 13,
+    "limite": 50,
+    "restam": 50,
+    "precoLancamento": 129.99
+   },
+   "imagens": [
+    "img/p/oversized-ekk-espada-copia-1.jpg",
+    "img/p/oversized-ekk-espada-copia-2.jpg"
+   ],
+   "atualizado": 1793914969587
+  },
   {
    "slug": "oversized-maranata-a-igreja-clama",
    "sku": "EKK-009",
@@ -201,39 +235,6 @@
     "img/p/oversized-ekklesia-chamados-para-fora-1.jpg"
    ],
    "atualizado": 1793894147803
-  },
-  {
-   "slug": "oversized-me-encontrou-por-detras-das-malhadas",
-   "sku": "EKK-004",
-   "nome": "Oversized Me Encontrou por Detrás das Malhadas",
-   "categoria": "Oversized",
-   "genero": "Unissex",
-   "versiculo": "2 Sm 7:8",
-   "descricao": "\"Tirei-te de detrás das ovelhas para que fosses príncipe sobre o meu povo.\" A ovelha campeã: fé e força. Estampa grande nas costas.\n\nOversized padrão EKKLESIA: malha 100% algodão, ombro caído, gola canelada e corpo amplo.\nTamanhos: M, G e GG.\n\nPeça sob encomenda: garanta a sua com 50% de entrada no Pix ou pague o valor total.",
-   "material": "Malha 100% algodão",
-   "gramatura": "",
-   "tecnica": "DTF",
-   "cores": [
-    "Preta"
-   ],
-   "tamanhos": [
-    "M",
-    "G",
-    "GG"
-   ],
-   "medidas": {},
-   "preco": 149.99,
-   "disponibilidade": "pre-venda",
-   "lancamento": {
-    "desconto": 13,
-    "limite": 50,
-    "restam": 50,
-    "precoLancamento": 129.99
-   },
-   "imagens": [
-    "img/p/oversized-me-encontrou-por-detras-das-malhadas-1.jpg"
-   ],
-   "atualizado": 1793894147802
   },
   {
    "slug": "oversized-jeova-nissi-minha-bandeira",
