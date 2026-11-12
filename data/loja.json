@@ -1,5 +1,5 @@
 {
- "geradoEm": "2026-11-06T00:58:31.078Z",
+ "geradoEm": "2026-11-12T16:05:22.213Z",
  "marca": {
   "nome": "EKKLESIA",
   "frase": "",
@@ -30,46 +30,6 @@
   "manifesto": "EKKLESIA não é só uma loja. É um movimento. Cada peça que você veste é uma declaração: você não compra roupa, você veste um propósito."
  },
  "produtos": [
-  {
-   "slug": "oversized-kenosis-esvaziou-se-a-si-mesmo-2",
-   "sku": "EKK-018",
-   "nome": "Oversized Kenosis · Esvaziou-Se A Si Mesmo",
-   "categoria": "Oversized",
-   "genero": "Feminino",
-   "versiculo": "",
-   "descricao": "Oversized feminina: caimento amplo e confortável, ombro caído, malha 100% algodão.\n\nPeça sob encomenda: garanta a sua com 50% de entrada no Pix ou pague o valor total.",
-   "material": "Malha 100% algodão",
-   "gramatura": "",
-   "tecnica": "DTF",
-   "cores": [
-    "Off-white",
-    "Bege",
-    "Preta",
-    "Azul royal"
-   ],
-   "tamanhos": [
-    "M",
-    "G",
-    "GG"
-   ],
-   "medidas": {},
-   "preco": 149.99,
-   "disponibilidade": "pre-venda",
-   "lancamento": {
-    "desconto": 13,
-    "limite": 50,
-    "restam": 50,
-    "precoLancamento": 129.99
-   },
-   "imagens": [
-    "img/p/oversized-kenosis-esvaziou-se-a-si-mesmo-2-1.jpg",
-    "img/p/oversized-kenosis-esvaziou-se-a-si-mesmo-2-2.jpg",
-    "img/p/oversized-kenosis-esvaziou-se-a-si-mesmo-2-3.jpg",
-    "img/p/oversized-kenosis-esvaziou-se-a-si-mesmo-2-4.jpg",
-    "img/p/oversized-kenosis-esvaziou-se-a-si-mesmo-2-5.jpg"
-   ],
-   "atualizado": 1793926704030
-  },
   {
    "slug": "oversized-logotipo-ekk-com-espada-gotica",
    "sku": "EKK-014",
@@ -104,9 +64,129 @@
    },
    "imagens": [
     "img/p/oversized-logotipo-ekk-com-espada-gotica-1.jpg",
-    "img/p/oversized-logotipo-ekk-com-espada-gotica-2.jpg"
+    "img/p/oversized-logotipo-ekk-com-espada-gotica-2.jpg",
+    "img/p/oversized-logotipo-ekk-com-espada-gotica-3.jpg",
+    "img/p/oversized-logotipo-ekk-com-espada-gotica-4.jpg"
    ],
-   "atualizado": 1793925740718
+   "atualizado": 1794499515309
+  },
+  {
+   "slug": "oversized-kenosis-esvaziou-se-a-si-mesmo-2-2",
+   "sku": "EKK-018",
+   "nome": "Oversized Kenosis · Esvaziou-Se A Si Mesmo",
+   "categoria": "Oversized",
+   "genero": "Feminino",
+   "versiculo": "",
+   "descricao": "Oversized feminina: caimento amplo e confortável, ombro caído, malha 100% algodão.\n\nPeça sob encomenda: garanta a sua com 50% de entrada no Pix ou pague o valor total.",
+   "material": "Malha 100% algodão",
+   "gramatura": "",
+   "tecnica": "DTF",
+   "cores": [
+    "Off-white",
+    "Bege",
+    "Preta",
+    "Azul royal"
+   ],
+   "tamanhos": [
+    "M",
+    "G",
+    "GG"
+   ],
+   "medidas": {},
+   "preco": 149.99,
+   "disponibilidade": "pre-venda",
+   "lancamento": {
+    "desconto": 13,
+    "limite": 50,
+    "restam": 50,
+    "precoLancamento": 129.99
+   },
+   "imagens": [
+    "img/p/oversized-kenosis-esvaziou-se-a-si-mesmo-2-2-1.jpg",
+    "img/p/oversized-kenosis-esvaziou-se-a-si-mesmo-2-2-2.jpg",
+    "img/p/oversized-kenosis-esvaziou-se-a-si-mesmo-2-2-3.jpg",
+    "img/p/oversized-kenosis-esvaziou-se-a-si-mesmo-2-2-4.jpg",
+    "img/p/oversized-kenosis-esvaziou-se-a-si-mesmo-2-2-5.jpg"
+   ],
+   "atualizado": 1794495877733
+  },
+  {
+   "slug": "oversized-kenosis-esvaziou-se-a-si-mesmo-2",
+   "sku": "EKK-016",
+   "nome": "Oversized Kenosis · Esvaziou-Se A Si Mesmo",
+   "categoria": "Oversized",
+   "genero": "Feminino",
+   "versiculo": "",
+   "descricao": "Oversized feminina: caimento amplo e confortável, ombro caído, malha 100% algodão.\n\nPeça sob encomenda: garanta a sua com 50% de entrada no Pix ou pague o valor total.",
+   "material": "Malha 100% algodão",
+   "gramatura": "",
+   "tecnica": "DTF",
+   "cores": [
+    "Bege",
+    "Off-white",
+    "Azul royal",
+    "Preta"
+   ],
+   "tamanhos": [
+    "M",
+    "G",
+    "GG"
+   ],
+   "medidas": {},
+   "preco": 149.99,
+   "disponibilidade": "pre-venda",
+   "lancamento": {
+    "desconto": 13,
+    "limite": 50,
+    "restam": 50,
+    "precoLancamento": 129.99
+   },
+   "imagens": [
+    "img/p/oversized-kenosis-esvaziou-se-a-si-mesmo-2-1.jpg",
+    "img/p/oversized-kenosis-esvaziou-se-a-si-mesmo-2-2.jpg",
+    "img/p/oversized-kenosis-esvaziou-se-a-si-mesmo-2-3.jpg",
+    "img/p/oversized-kenosis-esvaziou-se-a-si-mesmo-2-4.jpg",
+    "img/p/oversized-kenosis-esvaziou-se-a-si-mesmo-2-5.jpg"
+   ],
+   "atualizado": 1793926133217
+  },
+  {
+   "slug": "camiseta-maranata-a-igreja-clama",
+   "sku": "EKK-015",
+   "nome": "Camiseta Maranata · A Igreja Clama",
+   "categoria": "Camiseta feminina",
+   "genero": "Feminino",
+   "versiculo": "",
+   "descricao": "Camiseta Tech (TSH) feminina: manga curta, caimento mais ajustado e toque leve.\n\nPeça sob encomenda: garanta a sua com 50% de entrada no Pix ou pague o valor total.",
+   "material": "Malha 100% algodão",
+   "gramatura": "",
+   "tecnica": "DTF",
+   "cores": [
+    "Rosa claro",
+    "Pink",
+    "Verde-água"
+   ],
+   "tamanhos": [
+    "P",
+    "M",
+    "G",
+    "GG"
+   ],
+   "medidas": {},
+   "preco": 209.99,
+   "disponibilidade": "pre-venda",
+   "lancamento": {
+    "desconto": 14,
+    "limite": 50,
+    "restam": 50,
+    "precoLancamento": 179.99
+   },
+   "imagens": [
+    "img/p/camiseta-maranata-a-igreja-clama-1.jpg",
+    "img/p/camiseta-maranata-a-igreja-clama-2.jpg",
+    "img/p/camiseta-maranata-a-igreja-clama-3.jpg"
+   ],
+   "atualizado": 1793925990031
   },
   {
    "slug": "oversized-logotipo-ekklesia-com-faixa-curva",
@@ -141,7 +221,11 @@
     "precoLancamento": 129.99
    },
    "imagens": [
-    "img/p/oversized-logotipo-ekklesia-com-faixa-curva-1.jpg"
+    "img/p/oversized-logotipo-ekklesia-com-faixa-curva-1.jpg",
+    "img/p/oversized-logotipo-ekklesia-com-faixa-curva-2.jpg",
+    "img/p/oversized-logotipo-ekklesia-com-faixa-curva-3.jpg",
+    "img/p/oversized-logotipo-ekklesia-com-faixa-curva-4.jpg",
+    "img/p/oversized-logotipo-ekklesia-com-faixa-curva-5.jpg"
    ],
    "atualizado": 1793925140840
   },
