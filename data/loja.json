@@ -1,5 +1,5 @@
 {
- "geradoEm": "2026-11-12T16:51:07.594Z",
+ "geradoEm": "2026-11-12T16:52:34.574Z",
  "marca": {
   "nome": "EKKLESIA",
   "frase": "",
@@ -101,44 +101,6 @@
     "img/p/oversized-ekk-espada-3.jpg"
    ],
    "atualizado": 1794502182461
-  },
-  {
-   "slug": "oversized-kenosis-esvaziou-se-a-si-mesmo-2",
-   "sku": "EKK-016",
-   "nome": "Oversized Kenosis · Esvaziou-Se A Si Mesmo",
-   "categoria": "Oversized",
-   "genero": "Feminino",
-   "versiculo": "",
-   "descricao": "Oversized feminina: caimento amplo e confortável, ombro caído, malha 100% algodão.\n\nPeça sob encomenda: garanta a sua com 50% de entrada no Pix ou pague o valor total.",
-   "material": "Malha 100% algodão",
-   "gramatura": "",
-   "tecnica": "DTF",
-   "cores": [
-    "Bege",
-    "Off-white",
-    "Azul royal",
-    "Preta"
-   ],
-   "tamanhos": [
-    "M",
-    "G",
-    "GG"
-   ],
-   "medidas": {},
-   "preco": 149.99,
-   "disponibilidade": "pre-venda",
-   "lancamento": {
-    "desconto": 13,
-    "limite": 50,
-    "restam": 50,
-    "precoLancamento": 129.99
-   },
-   "imagens": [
-    "img/p/oversized-kenosis-esvaziou-se-a-si-mesmo-2-1.jpg",
-    "img/p/oversized-kenosis-esvaziou-se-a-si-mesmo-2-2.jpg",
-    "img/p/oversized-kenosis-esvaziou-se-a-si-mesmo-2-3.jpg"
-   ],
-   "atualizado": 1794501622822
   },
   {
    "slug": "oversized-logotipo-ekk-com-espada-gotica",
